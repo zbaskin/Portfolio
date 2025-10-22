@@ -29,12 +29,7 @@ export async function getReviewsFromCsv(): Promise<Review[]> {
       }
     })
 
-    reviews.sort((a, b) => {
-      const da = toTime(a.pubDate)
-      const db = toTime(b.pubDate)
-      if (db !== da) return db - da           // newer first
-      return a.title.localeCompare(b.title)   // stable tiebreaker
-    })
+    reviews.sort((a, b) => toLocalDayMs(b.pubDate) - toLocalDayMs(a.pubDate))
 
     return reviews
 
@@ -43,21 +38,26 @@ export async function getReviewsFromCsv(): Promise<Review[]> {
   }
 }
 
-function toTime(s: string): number {
-  // Normalize common numeric-only date formats if needed
-  // Prefer native parsing first; it's fine for ISO + most formats
+function toLocalDayMs(s: string): number {
+  if (!s) return 0
+
+  // YYYY-MM-DD (date-only) → construct LOCAL date at noon
+  const ymd = s.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+  if (ymd) {
+    const y = +ymd[1], m = +ymd[2], d = +ymd[3]
+    return new Date(y, m - 1, d, 12, 0, 0, 0).getTime()
+  }
+
+  // MM/DD/YYYY (date-only) → construct LOCAL date at noon
+  const mdy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
+  if (mdy) {
+    const m = +mdy[1], d = +mdy[2], y = +mdy[3]
+    return new Date(y, m - 1, d, 12, 0, 0, 0).getTime()
+  }
+
+  // Anything with a time (e.g., 2025-10-22T14:30:00Z) → use native parse
   const t = Date.parse(s)
-  if (!Number.isNaN(t)) return t
-
-  // Try YYYY-MM-DD manually
-  const m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/)
-  if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime()
-
-  // Try MM/DD/YYYY
-  const us = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
-  if (us) return new Date(Number(us[3]), Number(us[1]) - 1, Number(us[2])).getTime()
-
-  return 0 // unknown date → sort to bottom
+  return Number.isNaN(t) ? 0 : t
 }
 
 /** Minimal CSV parser supporting quoted fields, commas and newlines in quotes. */

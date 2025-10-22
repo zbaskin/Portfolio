@@ -15,7 +15,7 @@ export function ReviewCard({ review }: { review: Review }) {
         <h3 className="text-lg font-semibold mb-1">{review.title}</h3>
         <div className="flex items-center gap-3 mb-2">
           <p className="text-sm text-neutral-500">
-            {new Date(review.pubDate).toLocaleDateString()}
+            {formatPubDate(review.pubDate)}
           </p>
           {typeof review.rating === 'number' && (
             <div className="flex items-center gap-2">
@@ -34,6 +34,26 @@ export function ReviewCard({ review }: { review: Review }) {
 
 function strip(html: string) {
   return html.replace(/<[^>]*>/g, '')
+}
+
+function formatPubDate(s: string): string {
+  // YYYY-MM-DD
+  const ymd = s.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+  if (ymd) {
+    const y = +ymd[1], m = +ymd[2], d = +ymd[3]
+    const dt = new Date(y, m - 1, d, 12, 0, 0, 0) // local noon avoids TZ shifts
+    return dt.toLocaleDateString()
+  }
+  // MM/DD/YYYY
+  const mdy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
+  if (mdy) {
+    const m = +mdy[1], d = +mdy[2], y = +mdy[3]
+    const dt = new Date(y, m - 1, d, 12, 0, 0, 0)
+    return dt.toLocaleDateString()
+  }
+  // Otherwise let the runtime handle it (has explicit time or timezone)
+  const dt = new Date(s)
+  return isNaN(dt.getTime()) ? s : dt.toLocaleDateString()
 }
 
 /** 0–5 stars with half-star support and customizable colors */
