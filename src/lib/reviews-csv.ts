@@ -13,13 +13,19 @@ export async function getReviewsFromCsv(): Promise<Review[]> {
       const title = get('name') || get('title') || get('film') || get('movie') || 'Untitled'
       const link = get('Letterboxd URI') || get('link') || get('url') || '#'
       const description = get('description') || get('review') || get('content') || ''
-      const pubDate = get('pubdate') || get('date') || get('watched_on') || get('logged_at') || new Date().toISOString()
+      const pubDate = get('Watched Date') || get('pubdate') || get('date') || get('watched_on') || get('logged_at') || new Date().toISOString()
+      const ratingRaw = get('rating') ?? get('stars') ?? get('score')
+      const ratingNum = ratingRaw != null && ratingRaw !== '' ? Number(ratingRaw) : NaN
+      const rating = Number.isFinite(ratingNum)
+        ? Math.round(Math.max(0, Math.min(5, ratingNum)) * 2) / 2
+        : undefined
       return {
         guid: `${link}|${pubDate}` || Math.random().toString(36).slice(2),
         link,
         title,
         description,
         pubDate,
+        ...(rating === undefined ? {} : { rating }),
       }
     })
 
