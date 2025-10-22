@@ -8,7 +8,7 @@ export async function getReviewsFromCsv(): Promise<Review[]> {
     const csvPath = path.join(process.cwd(), 'public', 'reviews.csv')
     const data = await fs.readFile(csvPath, 'utf8')
     const rows = parseCsv(data)
-    return rows.map((row) => {
+    const reviews: Review[] = rows.map((row) => {
       const get = (k: string) => lookup(row, k)
       const title = get('name') || get('title') || get('film') || get('movie') || 'Untitled'
       const link = get('Letterboxd URI') || get('link') || get('url') || '#'
@@ -22,9 +22,36 @@ export async function getReviewsFromCsv(): Promise<Review[]> {
         pubDate,
       }
     })
+
+    reviews.sort((a, b) => {
+      const da = toTime(a.pubDate)
+      const db = toTime(b.pubDate)
+      if (db !== da) return db - da           // newer first
+      return a.title.localeCompare(b.title)   // stable tiebreaker
+    })
+
+    return reviews
+
   } catch {
     return []
   }
+}
+
+function toTime(s: string): number {
+  // Normalize common numeric-only date formats if needed
+  // Prefer native parsing first; it's fine for ISO + most formats
+  const t = Date.parse(s)
+  if (!Number.isNaN(t)) return t
+
+  // Try YYYY-MM-DD manually
+  const m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+  if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime()
+
+  // Try MM/DD/YYYY
+  const us = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
+  if (us) return new Date(Number(us[3]), Number(us[1]) - 1, Number(us[2])).getTime()
+
+  return 0 // unknown date → sort to bottom
 }
 
 /** Minimal CSV parser supporting quoted fields, commas and newlines in quotes. */

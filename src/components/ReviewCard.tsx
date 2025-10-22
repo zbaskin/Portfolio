@@ -5,6 +5,7 @@ export type Review = {
   title: string
   description: string
   pubDate: string
+  rating?: number
 }
 
 export function ReviewCard({ review }: { review: Review }) {
