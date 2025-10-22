@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Zach Baskin',
   description: 'Projects, resume, and film reviews.',
   openGraph: {
-    title: 'Zach Baskin — Portfolio',
+    title: 'Zach Baskin',
     description: 'Projects, resume, and film reviews.',
     images: ['/og.jpg']
   },
