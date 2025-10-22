@@ -26,7 +26,7 @@ export function ReviewCard({ review }: { review: Review }) {
             </div>
           )}
         </div>
-        <p className="text-neutral-700 line-clamp-3">{strip(review.description)}</p>
+        <p className="text-neutral-700">{strip(review.description)}</p>
       </a>
     </article>
   )
