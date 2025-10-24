@@ -1,6 +1,6 @@
 
 import { getReviewsFromCsv } from '../../lib/reviews-csv'
-import { ReviewCard } from '../../components/ReviewCard'
+import { ReviewsBrowser } from '../../components/ReviewsBrowser'
 
 export const dynamic = 'error'
 
@@ -9,8 +9,6 @@ export default async function ReviewsPage() {
 
   return (
     <section className="space-y-6">
-      <h1 className="text-3xl font-semibold">Recent Reviews</h1>
-
       {reviews.length === 0 ? (
         <div className="card p-6">
           <p className="text-neutral-700">
@@ -18,13 +16,7 @@ export default async function ReviewsPage() {
           </p>
         </div>
       ) : (
-        <ul className="grid gap-4">
-          {reviews.map((r) => (
-            <li key={r.guid}>
-              <ReviewCard review={r} />
-            </li>
-          ))}
-        </ul>
+        <ReviewsBrowser items={reviews} pageSize={10} />
       )}
     </section>
   )
