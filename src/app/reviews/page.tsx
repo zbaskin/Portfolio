@@ -1,6 +1,7 @@
 
 import { getReviewsFromCsv } from '../../lib/reviews-csv'
 import { ReviewsBrowser } from '../../components/ReviewsBrowser'
+import { Suspense } from 'react'
 
 export const dynamic = 'error'
 
@@ -16,7 +17,9 @@ export default async function ReviewsPage() {
           </p>
         </div>
       ) : (
-        <ReviewsBrowser items={reviews} pageSize={10} />
+        <Suspense fallback={<div className="text-neutral-600">Loading reviews...</div>}>
+          <ReviewsBrowser items={reviews} pageSize={10} />
+        </Suspense>
       )}
     </section>
   )

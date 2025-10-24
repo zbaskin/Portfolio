@@ -58,7 +58,7 @@ export default function Home() {
         <article className="card p-6">
           <h2 className="text-xl font-semibold mb-2">Experience</h2>
           <p className="text-neutral-700 mb-3">
-            Build internal tools and cloud infrastructure, shipping automation features with React/Node, AWS, and DevOps best practices.
+            Builder of internal tools and cloud infrastructure, shipping automation features with React/Node, AWS, and DevOps best practices.
           </p>
           <div className="flex gap-3">
             <a className="px-4 py-2 rounded-xl bg-brand text-white hover:bg-brand-dark transition" 
