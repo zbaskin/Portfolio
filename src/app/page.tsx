@@ -3,7 +3,7 @@ export default function Home() {
   return (
     <section className="space-y-8">
       <h1 className="text-4xl font-bold tracking-tight">Hi, I’m Zach.</h1>
-      <p className="text-lg text-neutral-700 max-w-prose">
+      <p className="text-lg text-neutral-700 max-w-none">
         I build performant web apps and thoughtful product experiences. Currently hacking on
         <a className="text-brand ml-1 underline" href="https://vouchr.net" target="_blank" rel="noreferrer">Vouchr</a>.
       </p>
@@ -11,7 +11,11 @@ export default function Home() {
       <div className="grid gap-6 md:grid-cols-2">
         <article className="card p-6">
           <h2 className="text-xl font-semibold mb-2">About</h2>
-          <p className="text-neutral-700">Full‑stack engineer with a product mindset. I like clean APIs, fast UIs, and delightful details.</p>
+          <p className="text-neutral-700">
+            Motivated and versatile <strong>Full‑Stack Engineer</strong> with a product mindset. 
+            I like clean APIs, fast UIs, and delightful details. Eager to tackle new challenges
+            that demand innovative problem-solving.
+          </p>
         </article>
         <article className="card p-6">
           <h2 className="text-xl font-semibold mb-2">Featured Project — Vouchr</h2>
@@ -36,7 +40,13 @@ export default function Home() {
           </div>
         </article>
         <article className="card p-6">
-          <h2 className="text-xl font-semibold mb-2">Education</h2>
+          <h2 className="text-xl font-semibold mb-2">Education
+            <img
+              src="/gt-logo.png"
+              alt="Georgia Tech logo"
+              className="float-right ml-4 mb-2 w-16 h-16 object-contain rounded"
+            />
+          </h2>
           <p className="text-neutral-700">
             I conducted my undergraduate studies at the <strong>Georgia Institute of Technology</strong>. During my time, 
             I completed a <strong>Bachelor’s Degree in Computer Science</strong> with History Minor.
@@ -47,7 +57,9 @@ export default function Home() {
         </article>
         <article className="card p-6">
           <h2 className="text-xl font-semibold mb-2">Experience</h2>
-          <p className="text-neutral-700 mb-3">A ticket cataloging + social sharing app. React + TypeScript on the front‑end.</p>
+          <p className="text-neutral-700 mb-3">
+            Build internal tools and cloud infrastructure, shipping automation features with React/Node, AWS, and DevOps best practices.
+          </p>
           <div className="flex gap-3">
             <a className="px-4 py-2 rounded-xl bg-brand text-white hover:bg-brand-dark transition" 
               href="https://www.linkedin.com/in/zachbaskin/" 
