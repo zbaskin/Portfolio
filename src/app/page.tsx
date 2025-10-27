@@ -22,7 +22,7 @@ export default function Home() {
           <p className="text-neutral-700 mb-3">A ticket cataloging & social sharing app. React + TypeScript on the front‑end.</p>
           <div className="flex gap-3">
             <a 
-              className="px-4 py-2 rounded-xl bg-brand text-white hover:bg-brand-dark transition" 
+              className="px-4 py-2 rounded-xl bg-[#EE3C37] text-white hover:bg-[#801616] transition" 
               href="https://vouchr.net" 
               target="_blank" 
               rel="noreferrer"
@@ -58,10 +58,14 @@ export default function Home() {
         <article className="card p-6">
           <h2 className="text-xl font-semibold mb-2">Experience</h2>
           <p className="text-neutral-700 mb-3">
-            Builder of internal tools and cloud infrastructure, shipping automation features with React/Node, AWS, and DevOps best practices.
+            I bridge product and ops: diagnose high-priority outages, drive root-cause fixes, 
+            and automate noisy workflows.
+            <br />
+            <br />
+            Stack: React/Next.js, Node, TypeScript, AWS, CI/CD.
           </p>
           <div className="flex gap-3">
-            <a className="px-4 py-2 rounded-xl bg-brand text-white hover:bg-brand-dark transition" 
+            <a className="px-4 py-2 rounded-xl bg-[#EE3C37] text-white hover:bg-[#801616] transition" 
               href="https://www.linkedin.com/in/zachbaskin/" 
               target="_blank" 
               rel="noreferrer"
@@ -70,6 +74,38 @@ export default function Home() {
             </a>
           </div>
         </article>
+      </div>
+      {/* --- Contact CTA --- */}
+      <div className="card p-6 md:col-span-2">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Let’s work together</h2>
+            <p className="text-neutral-700">
+              Have a role or project in mind? I’m open to opportunities and collaborations.
+            </p>
+          </div>
+
+          <div className="flex gap-3">
+            <a
+              href="mailto:zachbas@gmail.com?subject=Hi%20Zach%20—%20Opportunity"
+              target="_blank" 
+              rel="noreferrer"
+              className="inline-flex h-10 items-center justify-center whitespace-nowrap
+               rounded-xl px-4 bg-[#EE3C37] text-white hover:bg-[#801616] transition"
+            >
+              Contact Me
+            </a>
+            <a
+              href="/resume.pdf"
+              className="inline-flex h-10 items-center justify-center whitespace-nowrap
+               rounded-xl px-4 border border-neutral-200 hover:bg-neutral-50 transition"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Resume (PDF)
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -32,8 +32,16 @@ export function NavBar() {
   return (
     <nav className="relative flex h-14 items-center gap-6">
       {/* Brand */}
+      
       <Link href="/" className="text-lg font-semibold">
-        Zach Baskin
+        <img
+          src="/z.png"
+          alt="Z logo"
+          className="w-8 h-8 float-left mr-4 object-contain rounded"
+        />
+        <p className="hidden md:inline">
+          Zach Baskin
+        </p>
       </Link>
 
       {/* Desktop links */}
