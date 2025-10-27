@@ -6,7 +6,7 @@ export default function ResumePage() {
       <h1 className="text-3xl font-semibold">Resume</h1>
       <p className="text-neutral-700">Download the PDF or preview it below.</p>
       <div className="flex gap-3">
-        <a className="px-4 py-2 rounded-xl bg-brand text-white hover:bg-brand-dark transition" href="/resume.pdf" download>
+        <a className="px-4 py-2 rounded-xl bg-[#EE3C37] text-white hover:bg-[#801616] transition" href="/resume.pdf" download>
           Download PDF
         </a>
         <a className="px-4 py-2 rounded-xl border hover:bg-neutral-50" href="/resume.pdf" target="_blank" rel="noreferrer">
